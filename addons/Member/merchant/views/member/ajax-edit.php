@@ -24,7 +24,8 @@ $form = ActiveForm::begin([
             'readonly' => !empty($model->username)
         ])->hint('创建后不可修改') ?>
         <?= $form->field($model, 'password_hash')->passwordInput() ?>
-        <?= $form->field($model, 'mobile')->textInput()->hint('有些入口以手机号码为账号') ?>
+        <?= $form->field($model, 'mobile')->textInput()->hint('为巡检端登录使用') ?>
+        <?= $form->field($model, 'realname')->textInput()->hint('人员姓名') ?>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>

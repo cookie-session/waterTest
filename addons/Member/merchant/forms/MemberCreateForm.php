@@ -18,7 +18,7 @@ class MemberCreateForm extends MemberForm
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            ['username', 'required'],
+            [['username','mobile'], 'required'],
             ['password_hash', 'required'],
         ]);
     }

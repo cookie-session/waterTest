@@ -17,11 +17,6 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
             <div class="box-header">
                 <h3 class="box-title"><?= $this->title; ?></h3>
                 <div class="box-tools">
-                    <?= Html::linkButton(['import-member'], '导入会员', [
-                        'data-toggle' => 'modal',
-                        'data-target' => '#ajaxModal',
-                        'class' => 'btn btn-white',
-                    ]) ?>
                     <?= Html::create(['ajax-edit'], '创建', [
                         'data-toggle' => 'modal',
                         'data-target' => '#ajaxModal',
@@ -53,36 +48,13 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
                             'footer' => '合计',
                         ],
                         [
-                            'attribute' => 'head_portrait',
-                            'headerOptions' => ['style' => 'width: 100px'],
-                            'value' => function ($model) {
-                                return Html::img(ImageHelper::defaultHeaderPortrait(Html::encode($model->head_portrait)), [
-                                    'class' => 'img-circle rf-img-md elevation-1',
-                                ]);
-                            },
-                            'filter' => false,
-                            'format' => 'raw',
-                        ],
-                        [
-                            'attribute' => 'nickname',
+                            'attribute' => 'realname',
                             'format' => 'raw',
                             'value' => function ($model) {
-                                $tagsHtml = '';
-                                $tagsTitle = [];
-                                $i = 1;
-                                foreach ($model->tag as $item) {
-                                    $tagsTitle[]= Html::encode($item['title']);
-                                    if ($i <= 3) {
-                                        $tagsHtml .= '<span class="label label-outline-default">' . Html::encode($item['title']) . '</span>';
-                                    }
-
-                                    $i++;
-                                }
-
-                                $tagMore = count($model->tag) > 3 ? "<span title='" . implode(', ', $tagsTitle) ."'>...</span>" : '';
-
-                                return Html::encode($model->nickname) . "<br>" . $tagsHtml . $tagMore;
+                                return Html::encode($model->realname);
                             },
+                            'headerOptions' => ['style' => 'width:150px;'],   // 表头宽度
+    'contentOptions' => ['style' => 'width:150px;'],  // 单元格宽度
                         ],
                         [
                             'attribute' => 'mobile',
@@ -90,6 +62,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
                         ],
                         [
                             'attribute' => 'memberLevel.name',
+                            'label' => '角色',
                             'filter' => Html::activeDropDownList($searchModel, 'current_level', $levelMap, [
                                     'prompt' => '全部',
                                     'class' => 'form-control'
@@ -101,57 +74,6 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
                                 ]);
                             },
                             'format' => 'raw',
-                        ],
-                        [
-                            'label' => '邀请人',
-                            'attribute' => 'pid',
-                            'headerOptions' => ['class' => 'col-md-1 text-align-center'],
-                            'contentOptions' => ['class' => 'text-align-center'],
-                            'filter' => Html::activeTextInput($searchModel, 'pid', [
-                                    'class' => 'form-control',
-                                    'placeholder' => '邀请用户 ID'
-                                ]
-                            ),
-                            'format' => 'raw',
-                            'value' => function ($model) {
-                                if ($model->pid === 0 || empty($model->parent)) {
-                                    return '---';
-                                }
-
-                                return MemberHelper::html($model->parent);
-                            },
-                        ],
-                        [
-                            'label' => '账户金额',
-                            'filter' => false, //不显示搜索框
-                            'value' => function ($model) {
-                                return "剩余：" . $model->account->user_money . '<br>' .
-                                    "累计：" . $model->account->accumulate_money . '<br>' .
-                                    "累计消费：" . abs($model->account->consume_money);
-                            },
-                            'format' => 'raw',
-                            'footer' => $pageAccountTotal['user_money'],
-                        ],
-                        [
-                            'label' => '账户积分',
-                            'filter' => false, //不显示搜索框
-                            'value' => function ($model) {
-                                return "剩余：" . $model->account->user_integral . '<br>' .
-                                    "累计：" . $model->account->accumulate_integral . '<br>' .
-                                    "累计消费：" . abs($model->account->consume_integral);
-                            },
-                            'format' => 'raw',
-                            'footer' => $pageAccountTotal['user_integral'],
-                        ],
-                        [
-                            'label' => '账户成长值',
-                            'filter' => false, //不显示搜索框
-                            'value' => function ($model) {
-                                return "当前：" . $model->account->user_growth . '<br>' .
-                                    "累计：" . $model->account->accumulate_growth . '<br>';
-                            },
-                            'format' => 'raw',
-                            'footer' => $pageAccountTotal['user_growth'],
                         ],
                         [
                             'label' => '最后登录 / 注册时间',
@@ -194,7 +116,7 @@ HTML,
                             'header' => "操作",
                             'contentOptions' => ['class' => 'text-align-center'],
                             'class' => 'yii\grid\ActionColumn',
-                            'template' => '{ajax-edit} {address} {update-level} {recharge} {edit} {status} {blacklist} {destroy}',
+                            'template' => '{ajax-edit}  {recharge} {edit}{destroy}',
                             'buttons' => [
                                 'ajax-edit' => function ($url, $model, $key) {
                                     return Html::a('账号密码', ['ajax-edit', 'id' => $model->id], [
@@ -203,34 +125,9 @@ HTML,
                                             'class' => 'blue'
                                         ]) . '<br>';
                                 },
-                                'address' => function ($url, $model, $key) {
-                                    return Html::a('收货地址', ['address/index', 'member_id' => $model->id], [
-                                            'class' => 'cyan'
-                                        ]) . '<br>';
-                                },
-                                'update-level' => function ($url, $model, $key) {
-                                    return Html::a('更换等级', ['update-level', 'id' => $model->id], [
-                                            'data-toggle' => 'modal',
-                                            'data-target' => '#ajaxModal',
-                                            'class' => 'green'
-                                        ]) . '<br>';
-                                },
-                                'recharge' => function ($url, $model, $key) {
-                                    return Html::a('充值', ['recharge', 'id' => $model->id], [
-                                            'data-toggle' => 'modal',
-                                            'data-target' => '#ajaxModal',
-                                            'class' => 'orange'
-                                        ]) . '<br>';
-                                },
                                 'edit' => function ($url, $model, $key) {
                                     return Html::a('编辑', ['edit', 'id' => $model->id], [
                                             'class' => 'purple'
-                                        ]) . '<br>';
-                                },
-                                'blacklist' => function ($url, $model, $key) {
-                                    return Html::a('黑名单', ['blacklist', 'id' => $model->id], [
-                                            'class' => 'gray-dark',
-                                            'onclick' => "rfTwiceAffirm(this, '确认拉入黑名单吗？', '请谨慎操作');return false;"
                                         ]) . '<br>';
                                 },
                                 'destroy' => function ($url, $model, $key) {

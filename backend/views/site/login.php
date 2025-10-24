@@ -90,7 +90,7 @@ $this->title = Yii::$app->params['adminTitle'];
         <div class="card-body login-card-body">
             <div class="tab-content" id="custom-tabs-four-tabContent">
                 <div class="tab-pane fade active show" id="custom-1">
-                    <p class="login-box-msg <?= empty($hasWechat) ? '' : 'hide'; ?>">Welcome to</p>
+                    <p class="login-box-msg <?= empty($hasWechat) ? '' : 'hide'; ?>">欢迎您</p>
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                     <?= $form->field($model, 'username')->textInput(['placeholder' => '登录账号'])->label(false); ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => '登录密码'])->label(false); ?>
@@ -115,7 +115,7 @@ $this->title = Yii::$app->params['adminTitle'];
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
-                <div class="tab-pane fade" id="custom-2">
+                <!-- <div class="tab-pane fade" id="custom-2">
                     <div class="text-center">
                         <span class="help">请使用 "微信扫一扫" 进行登录</span><br>
                         <div class="position-relative wechat-qr-box">
@@ -135,11 +135,11 @@ $this->title = Yii::$app->params['adminTitle'];
                             <span class="help wechat-expire-seconds">剩余有效期 <span id="expire-seconds">300</span> 秒</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <div class="social-auth-links text-center">
+            <!-- <div class="social-auth-links text-center">
                 <p><?= Html::encode(Yii::$app->services->config->backendConfig('web_copyright')); ?></p>
-            </div>
+            </div> -->
         </div>
         <!-- /.login-card-body -->
     </div>

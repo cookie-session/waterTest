@@ -2,7 +2,7 @@
 return [
     'adminEmail' => '751393839@qq.com',
     'adminAcronym' => 'RF',
-    'adminTitle' => 'RageFrame',
+    'adminTitle' => '在线运维监管系统',
     'adminDefaultHomePage' => ['main/home'], // 默认主页
 
     'isMobile' => false, // 手机访问
