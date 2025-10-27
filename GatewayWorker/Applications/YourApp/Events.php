@@ -30,13 +30,16 @@ require __DIR__ . '/../../../vendor/autoload.php';
  * 主要是处理 onConnect onMessage onClose 三个方法
  * onConnect 和 onClose 如果不需要可以不用实现并删除
  */
+//        self::$db = new \Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'root','gayy');
+        // self::$db = new \Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'LiuYi19920705!','aysh');
+
+
 class Events
 {
     public static $db = null;
 
     public static function onWorkerStart(){
-//        self::$db = new \Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'root','gayy');
-        // self::$db = new \Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'LiuYi19920705!','aysh');
+
     }
 
     /**
