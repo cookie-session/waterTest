@@ -36,7 +36,7 @@ class Events
 
     public static function onWorkerStart(){
 //        self::$db = new \Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'root','gayy');
-        self::$db = new \Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'LiuYi19920705!','aysh');
+        // self::$db = new \Workerman\MySQL\Connection('127.0.0.1', '3306', 'root', 'LiuYi19920705!','aysh');
     }
 
     /**
