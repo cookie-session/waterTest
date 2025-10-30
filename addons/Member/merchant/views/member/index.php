@@ -39,22 +39,11 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['index']];
                             'visible' => false, // 不显示#
                         ],
                         [
-                            'attribute' => 'id',
-                            'filter' => Html::activeTextInput($searchModel, 'id', [
-                                    'class' => 'form-control',
-                                    'style' => 'width: 50px'
-                                ]
-                            ),
-                            'footer' => '合计',
-                        ],
-                        [
                             'attribute' => 'realname',
                             'format' => 'raw',
                             'value' => function ($model) {
                                 return Html::encode($model->realname);
-                            },
-                            'headerOptions' => ['style' => 'width:150px;'],   // 表头宽度
-    'contentOptions' => ['style' => 'width:150px;'],  // 单元格宽度
+                            }
                         ],
                         [
                             'attribute' => 'mobile',

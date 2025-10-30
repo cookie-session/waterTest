@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3adcc8a8e78403236cb2434558a7469c",
+    "content-hash": "1ba35d9f02f708f446cb9efd2c5f75b9",
     "packages": [
         {
             "name": "2amigos/qrcode-library",
@@ -1993,6 +1993,50 @@
                 "source": "https://github.com/php-imagine/Imagine/tree/v0.5.0"
             },
             "time": "2013-07-10T17:25:36+00:00"
+        },
+        {
+            "name": "istvan-ujjmeszaros/bootstrap-duallistbox",
+            "version": "4.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox.git",
+                "reference": "3ccface38d08c2bfb4dd56c958ddbd33348c688f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/istvan-ujjmeszaros/bootstrap-duallistbox/zipball/3ccface38d08c2bfb4dd56c958ddbd33348c688f",
+                "reference": "3ccface38d08c2bfb4dd56c958ddbd33348c688f",
+                "shasum": ""
+            },
+            "suggest": {
+                "components/jquery": "2.0.*",
+                "twbs/bootstrap": "3.*"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "István Ujj-Mészáros",
+                    "homepage": "https://github.com/istvan-ujjmeszaros"
+                }
+            ],
+            "description": "A responsive dual listbox widget optimized for Twitter Bootstrap. It works on all modern browsers and on touch devices.",
+            "homepage": "https://www.virtuosoft.eu/code/bootstrap-duallistbox/",
+            "keywords": [
+                "bootstrap",
+                "bootstrap duallistbox",
+                "bootstrap select",
+                "duallistbox",
+                "select"
+            ],
+            "support": {
+                "issues": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/issues",
+                "source": "https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/tree/v4.0.2"
+            },
+            "time": "2020-04-25T00:19:39+00:00"
         },
         {
             "name": "jaeger/g-http",
@@ -6614,6 +6658,55 @@
                 }
             ],
             "time": "2024-09-11T14:53:51+00:00"
+        },
+        {
+            "name": "softark/yii2-dual-listbox",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/softark/yii2-dual-listbox.git",
+                "reference": "c8a803b4962bb04e831c6af806a6ff9e9e0d4e3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/softark/yii2-dual-listbox/zipball/c8a803b4962bb04e831c6af806a6ff9e9e0d4e3a",
+                "reference": "c8a803b4962bb04e831c6af806a6ff9e9e0d4e3a",
+                "shasum": ""
+            },
+            "require": {
+                "istvan-ujjmeszaros/bootstrap-duallistbox": "^3.0|^4.0",
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "softark\\duallistbox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nobuo Kihara",
+                    "email": "softark@gmail.com",
+                    "homepage": "https://softark.net"
+                }
+            ],
+            "description": "Bootstrap Dual Listbox Widget for Yii 2",
+            "keywords": [
+                "dual-listbox",
+                "duallistbox",
+                "widget",
+                "yii 2",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/softark/yii2-dual-listbox/issues?state=open",
+                "source": "https://github.com/softark/yii2-dual-listbox"
+            },
+            "time": "2022-09-08T08:42:13+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

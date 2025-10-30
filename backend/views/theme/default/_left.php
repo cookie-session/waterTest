@@ -11,7 +11,6 @@ use common\enums\ThemeLayoutEnum;
     <!-- Brand Logo -->
     <?php if (Yii::$app->params['theme']['layout'] == ThemeLayoutEnum::DEFAULT) { ?>
         <a href="" class="brand-link">
-            <img src="<?= ImageHelper::defaultHeaderPortrait(Yii::$app->services->config->backendConfig('web_logo'), '@baseResources/img/logo.png'); ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-2">
             <span class="brand-text font-weight-light"><?= Yii::$app->params['adminTitle']; ?></span>
         </a>
     <?php } ?>

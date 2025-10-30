@@ -70,7 +70,8 @@
         "php-di/php-di": "^6.4",
         "ext-bcmath": "*",
         "ext-json": "*",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "softark/yii2-dual-listbox": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
