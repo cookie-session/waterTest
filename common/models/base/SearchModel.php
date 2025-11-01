@@ -144,29 +144,32 @@ class SearchModel extends Model
      */
     private function conditionTrans($attributeName, $value)
     {
-        switch (true) {
-            case is_array($value):
-                return [$attributeName => $value];
-                break;
-            case stripos($value, '>=') !== false:
-                return ['>=', $attributeName, substr($value, 2)];
-                break;
-            case stripos($value, '<=') !== false:
-                return ['<=', $attributeName, substr($value, 2)];
-                break;
-            case stripos($value, '<') !== false:
-                return ['<', $attributeName, substr($value, 1)];
-                break;
-            case stripos($value, '>') !== false:
-                return ['>', $attributeName, substr($value, 1)];
-                break;
-            case stripos($value, ',') !== false:
-                return [$attributeName => explode(',', $value)];
-                break;
-            default:
-                return [$attributeName => $value];
-                break;
-        }
+
+        // 避免非字符串类型导致 stripos 报错
+            if (!is_scalar($value)) { // 不是字符串/数字
+                if (is_object($value) && method_exists($value, 'getPrimaryKey')) {
+                    $value = $value->getPrimaryKey(); // 提取主键
+                } else {
+                    return [$attributeName => $value]; // 直接返回
+                }
+            }
+
+            switch (true) {
+                case is_array($value):
+                    return [$attributeName => $value];
+                case is_string($value) && stripos($value, '>=') !== false:
+                    return ['>=', $attributeName, substr($value, 2)];
+                case is_string($value) && stripos($value, '<=') !== false:
+                    return ['<=', $attributeName, substr($value, 2)];
+                case is_string($value) && stripos($value, '<') !== false:
+                    return ['<', $attributeName, substr($value, 1)];
+                case is_string($value) && stripos($value, '>') !== false:
+                    return ['>', $attributeName, substr($value, 1)];
+                case is_string($value) && stripos($value, ',') !== false:
+                    return [$attributeName => explode(',', $value)];
+                default:
+                    return [$attributeName => $value];
+            }
     }
 
     /**

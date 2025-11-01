@@ -9,7 +9,7 @@ use common\models\base\SearchModel;
 use yii\web\Controller;
 use common\models\WorkGroup\WorkGroupMember;
 use yii\helpers\ArrayHelper;
-use common\models\Site\Site;
+use common\models\Site\Site; 
 /**
 * WorkGroup
 *

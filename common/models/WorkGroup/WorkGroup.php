@@ -3,7 +3,7 @@
 namespace common\models\WorkGroup;
 
 use Yii;
-use common\models\Site\Site;
+use common\models\Site\Site; 
 /**
  * This is the model class for table "rf_work_group".
  *
