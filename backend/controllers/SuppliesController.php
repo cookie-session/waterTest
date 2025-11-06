@@ -7,6 +7,11 @@ use common\models\supplies\Supplies;
 use common\traits\Curd;
 use common\models\base\SearchModel;
 use yii\web\Controller;
+use common\models\warehouse\Warehouse;
+use common\models\supplies\SuppliesType;
+use common\models\supplies\SuppliesRecord;
+use yii\helpers\ArrayHelper;
+
 
 /**
 * Supplies
@@ -42,12 +47,47 @@ class SuppliesController extends BaseController
             'pageSize' => $this->pageSize
         ]);
 
-        $dataProvider = $searchModel
-            ->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
         ]);
     }
+
+
+     /**
+     * 编辑/创建
+     *
+     * @return mixed
+     */
+    public function actionEdit()
+    {
+        $id = Yii::$app->request->get('id', null);
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->referrer();
+        }
+
+
+        $Warehouse = Warehouse::find()
+            ->select(['id', 'name'])
+            ->orderBy(['id' => SORT_ASC])
+            ->asArray()
+            ->all();
+
+        $SuppliesType = SuppliesType::find()
+            ->select(['id', 'name'])
+            ->orderBy(['id' => SORT_ASC])
+            ->asArray()
+            ->all();
+
+        return $this->render($this->action->id, [
+            'model' => $model,
+            'WarehouseList' => ArrayHelper::map($Warehouse, 'id', 'name'),
+            'SuppliesTypeList' => ArrayHelper::map($SuppliesType, 'id', 'name'),
+        ]);
+    }
+
 }

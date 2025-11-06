@@ -3,26 +3,25 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\warehouse\Warehouse;
+use common\models\supplies\SuppliesType;
 use common\traits\Curd;
 use common\models\base\SearchModel;
 use yii\web\Controller;
-use common\models\Site\Site;
-use yii\helpers\ArrayHelper;
+
 /**
-* Warehouse
+* SuppliesType
 *
-* Class WarehouseController
+* Class SuppliesTypeController
 * @package backend\controllers
 */
-class WarehouseController extends BaseController
+class SuppliesTypeController extends BaseController
 {
     use Curd;
 
     /**
-    * @var Warehouse
+    * @var SuppliesType
     */
-    public $modelClass = Warehouse::class;
+    public $modelClass = SuppliesType::class;
 
 
     /**
@@ -49,31 +48,6 @@ class WarehouseController extends BaseController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
-        ]);
-    }
-
-    /**
-     * 编辑/创建
-     *
-     * @return mixed
-     */
-    public function actionEdit()
-    {
-        $id = Yii::$app->request->get('id', null);
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->referrer();
-        }
-
-        $site = Site::find()
-            ->select(['id', 'name'])
-            ->orderBy(['id' => SORT_ASC])
-            ->asArray()
-            ->all();
-
-        return $this->render($this->action->id, [
-            'model' => $model,
-            'siteList' => ArrayHelper::map($site, 'id', 'name'),
         ]);
     }
 }

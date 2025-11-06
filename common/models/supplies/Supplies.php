@@ -40,7 +40,7 @@ class Supplies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['number', 'image', 'brand', 'model', 'description', 'created_at', 'updated_at'], 'default', 'value' => null],
+            [['number', 'image', 'brand', 'model_num', 'description', 'created_at', 'updated_at'], 'default', 'value' => null],
             [['stock'], 'default', 'value' => 0],
             [['price'], 'default', 'value' => 0.00],
             [['status'], 'default', 'value' => 1],
@@ -50,7 +50,7 @@ class Supplies extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['number'], 'string', 'max' => 60],
             [['image'], 'string', 'max' => 255],
-            [['name', 'brand', 'model'], 'string', 'max' => 100],
+            [['name', 'brand', 'model_num'], 'string', 'max' => 100],
             [['unit'], 'string', 'max' => 50],
         ];
     }
@@ -67,7 +67,7 @@ class Supplies extends \yii\db\ActiveRecord
             'name' => '物资名称',
             'type_id' => '物资类型ID',
             'brand' => '品牌',
-            'model' => '型号',
+            'model_num' => '型号',
             'unit' => '单位（个/箱/米等）',
             'warning_stock' => '库存警戒值',
             'price' => '物资单价',
@@ -78,5 +78,24 @@ class Supplies extends \yii\db\ActiveRecord
             'updated_at' => '更新时间',
             'warehouse_id' => '仓库ID',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->created_at = time();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function getWarehouse(){
+        return $this->hasOne(\common\models\warehouse\Warehouse::class, ['id' => 'warehouse_id']);
+    }
+    
+    public function getType(){
+        return $this->hasOne(SuppliesType::class, ['id' => 'type_id']);
     }
 }

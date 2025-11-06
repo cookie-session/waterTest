@@ -23,35 +23,73 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-body table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'tableOptions' => ['class' => 'table table-hover'],
+        'tableOptions' => ['class' => 'table table-hover text-center'],
+        'rowOptions' => function ($model) {
+            // 如果当前库存 <= 预警库存，则背景色为淡红色
+            if ($model->type == 1) {
+                return ['style' => 'background-color: #bbfdc6ff;']; // 淡红色
+            }
+            if ($model->type == 2) {
+                return ['style' => 'background-color: #faeaeaff;']; // 淡红色
+            }
+            return [];
+        },
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
                 'visible' => false,
             ],
 
-            //'id',
-            'material_id',
-            'type',
-            'quantity',
+            [
+                'attribute' => 'id',
+                'label' => '序号',
+                'format' => 'text',
+                'value' => function($model){
+                    return "#".$model->id;
+                },
+            ],
+            [
+                'attribute' => 'supplies_id',
+                'label' => '物资名称',
+                'value' => function($model){
+                    return $model->material->name;
+                },
+            ],
+            [
+                'attribute' => 'type',
+                'label' => '操作类型',
+                'value' => function($model){
+                    if($model->type == 1){
+                        return '入库';
+                    }else if($model->type == 2){
+                        return '出库';
+                    }
+                },
+            ],
+            [
+                'attribute' => 'quantity',
+                'label' => '出入数量',
+                'value' => function($model){
+                    return $model->quantity;
+                },
+            ],
             'price',
             'operator_id',
-            'remark',
+            [
+                'attribute' => 'remark',
+                'value' => function($model){
+                    return $model->remark != null && $model->remark != "" ? Html::decode($model->remark):"未设置";
+                },
+            ],
             //'created_at',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
-                'template' => '{edit} {status} {delete}',
+                'template' => '{edit}',
                 'buttons' => [
-                'edit' => function($url, $model, $key){
-                        return Html::edit(['edit', 'id' => $model->id]);
-                },
-               'status' => function($url, $model, $key){
-                        return Html::status($model['status']);
-                  },
-                'delete' => function($url, $model, $key){
-                        return Html::delete(['delete', 'id' => $model->id]);
-                },
+                    'edit' => function($url, $model, $key){
+                            return Html::edit(['edit', 'id' => $model->id]);
+                    },
                 ]
             ]
     ]

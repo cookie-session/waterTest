@@ -4,11 +4,11 @@ use common\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\supplies\SuppliesRecord */
+/* @var $model common\models\supplies\SuppliesType */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->title = 'Supplies Record';
-$this->params['breadcrumbs'][] = ['label' => 'Supplies Records', 'url' => ['index']];
+$this->title = '物资新增/编辑';
+$this->params['breadcrumbs'][] = ['label' => 'Supplies Types', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -25,12 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]); ?>
                 <div class="col-sm-12">
-                    <?= $form->field($model, 'material_id')->textInput() ?>
-                    <?= $form->field($model, 'type')->textInput() ?>
-                    <?= $form->field($model, 'quantity')->textInput() ?>
-                    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'operator_id')->textInput() ?>
-                    <?= $form->field($model, 'remark')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'sort')->textInput()->hint("值越小越靠前") ?>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-center">

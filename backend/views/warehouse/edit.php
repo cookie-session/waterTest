@@ -21,13 +21,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-body">
                 <?php $form = ActiveForm::begin([
                     'fieldConfig' => [
-                        'template' => "<div class="row"><div class='col-2 text-right'>{label}</div><div class='col-10'>{input}\n{hint}\n{error}</div></div>",
+                        'template' => "<div class='row'><div class='col-2 text-right'>{label}</div><div class='col-10'>{input}\n{hint}\n{error}</div></div>",
                     ],
                 ]); ?>
                 <div class="col-sm-12">
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'site')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'site')->dropDownList(
+                        $siteList,
+                        ['prompt' => '请选择站点']
+                    ) ?>
                     <?= $form->field($model, 'contact_person')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'contact_phone')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'note')->textInput(['maxlength' => true]) ?>

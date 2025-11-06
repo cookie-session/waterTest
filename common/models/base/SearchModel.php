@@ -124,7 +124,7 @@ class SearchModel extends Model
         }
 
         $value = $this->$attribute;
-        if ($value === '') {
+        if ($value === '' || $value === null) {
             return;
         }
 

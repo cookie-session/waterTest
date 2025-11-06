@@ -38,11 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                             ]
                     ]); ?>
-                    <?= $form->field($model, 'warehouse_id')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'warehouse_id')->dropDownList(
+                        $WarehouseList,
+                        ['prompt' => '请选择仓库']
+                    ) ?>
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'type_id')->textInput() ?>
+                    <?= $form->field($model, 'type_id')->dropDownList($SuppliesTypeList,['prompt' => '请选择物资类型']) ?>
                     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'model_num')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'warning_stock')->textInput() ?>
                     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
