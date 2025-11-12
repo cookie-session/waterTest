@@ -7,7 +7,9 @@ use common\models\task\Task;
 use common\traits\Curd;
 use common\models\base\SearchModel;
 use yii\web\Controller;
-
+use common\models\Site\Site;
+use common\models\WorkGroup\WorkGroup;
+use yii\helpers\ArrayHelper;
 /**
 * Task
 *
@@ -48,6 +50,33 @@ class TaskController extends BaseController
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+        ]);
+    }
+
+
+
+     /**
+     * 编辑/创建
+     *
+     * @return mixed
+     */
+    public function actionEdit()
+    {
+        $id = Yii::$app->request->get('id', null);
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->referrer();
+        }
+
+
+        $site = Site::find()->select(['id','name'])->asArray()->all();
+
+        $workGroup = WorkGroup::find()->select(['id','name'])->asArray()->all();
+
+        return $this->render($this->action->id, [
+            'model' => $model,
+            'site' => ArrayHelper::map($site,'id','name'),
+            'workGroup' => ArrayHelper::map($workGroup,'id','name'),
         ]);
     }
 }

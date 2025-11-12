@@ -4,11 +4,11 @@ use common\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\task\Task */
+/* @var $model common\models\scheme\Scheme */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->title = 'Task';
-$this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];
+$this->title = 'Scheme';
+$this->params['breadcrumbs'][] = ['label' => 'Schemes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -21,16 +21,19 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-body">
                 <?php $form = ActiveForm::begin([
                     'fieldConfig' => [
-                        'template' => "<div class='row'><div class='col-2 text-right'>{label}</div><div class='col-10'>{input}\n{hint}\n{error}</div></div>",
+                        'template' => "<div class="row"><div class='col-2 text-right'>{label}</div><div class='col-10'>{input}\n{hint}\n{error}</div></div>",
                     ],
                 ]); ?>
                 <div class="col-sm-12">
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'site_id')->dropDownList($site) ?>
-                    <?= $form->field($model, 'group_id')->dropDownList($workGroup) ?>
-                    <?= $form->field($model, 'scheme_id')->textInput() ?>
-                    <?= $form->field($model, 'task_time')->textInput() ?>
-                    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'entrust_company')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'company_address')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'entrust_contact')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'entrust_phone')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'inspect_company')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'display_name')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'detection_type')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'remark')->textarea(['rows' => 6]) ?>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-center">
